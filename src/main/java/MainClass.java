@@ -1,27 +1,52 @@
-enum SwitchInputs {
-    INPUT1, INPUT2, INPUT3, DEFAULT
-}
-
 public class MainClass {
+
+    /*
+        argument 1 => energyLevel
+        argument 2 => distance between 2 cars (in secs)
+     */
     public static void main(String[] args) {
-        System.out.println(checkIfElse(100));
-        System.out.println(checkSwitchCase(SwitchInputs.DEFAULT));
+        int speed = drive(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+        System.out.println(speed);
     }
 
-    public static boolean checkIfElse(int input) {
-        return input > 80;
-    }
+    private static int drive(int energyLevel, int distanceInFront) {
+        if (energyLevel >= 80) {
+            if (distanceInFront > 2 && distanceInFront < 6) {
+                return driveNormalSpeed();
+            }
 
-    public static int checkSwitchCase(SwitchInputs input) {
-        switch (input) {
-            case INPUT1:
-                return 1;
-            case INPUT2:
-                return 2;
-            case INPUT3:
-                return 3;
-            default:
-                return 0;
+            return driveFaster();
+        } else if (energyLevel >= 50) {
+            if (distanceInFront < 3) {
+                return driveSlow();
+            }
+
+            return driveNormalSpeed();
+        } else if (energyLevel > 20) {
+            if (distanceInFront < 2) {
+                return parkIt();
+            }
+
+            return driveSlow();
         }
+
+        return parkIt();
     }
+
+    private static int parkIt() {
+        return 0;
+    }
+
+    private static int driveSlow() {
+        return (int) (10 + Math.random() * 25);
+    }
+
+    private static int driveNormalSpeed() {
+        return (int) (35 + Math.random() * 20);
+    }
+
+    private static int driveFaster() {
+        return (int) (55 + Math.random() * 30);
+    }
+
 }
