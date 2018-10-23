@@ -1,0 +1,14 @@
+target = MainClass
+
+listener = gov.nasa.jpf.listener.NumericValueChecker
+
+#	path condition: constraint # = 2
+#	distanceInFront_2_SYMINT[0] <= CONST_2 &&
+#	energyLevel_1_SYMINT[80] >= CONST_80
+
+target.args = 80,0
+
+range.vars = 1
+range.1.var = MainClass.main(java.lang.String[]):speed
+range.1.min = 55
+range.1.max = 85

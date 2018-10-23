@@ -1,20 +1,22 @@
 import gov.nasa.jpf.symbc.Debug;
+import gov.nasa.jpf.symbc.Symbolic;
 public class MainClass {
 	 /*
     	argument 1 => energyLevel
     	argument 2 => distance between 2 cars (in secs)
 	 */
 	public static void main(String[] args) {
-	    int speed = drive(80,4);
-//	    System.out.println(speed);
-	    Debug.printPC("");
+		int speed = drive(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+//	    int speed = drive(80,4);
+	    Debug.printPC("\n================\npath condition: ");
+	    System.out.println("resultant car speed: " + speed);
 	}
 	
 	private static int drive(int energyLevel, int distanceInFront) {
 	    if (energyLevel >= 80) {
 	        if (distanceInFront > 2 && distanceInFront < 6) {
 	            return driveNormalSpeed();
-	        }
+	        }	
 	
 	        return driveFaster();
 	    } else if (energyLevel >= 50) {
